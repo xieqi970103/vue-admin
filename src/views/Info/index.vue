@@ -67,7 +67,7 @@
             type="selection"
             width="45">
             </el-table-column>
-            <el-table-column prop="title" label="标题" width="400"></el-table-column>
+            <el-table-column prop="title" label="标题" width="350"></el-table-column>
             <el-table-column  prop="categoryId" label="类型" width="100" :formatter="toCategory"></el-table-column>
             <el-table-column  prop="createDate" label="日期" width="155" :formatter="toDate"></el-table-column>
             <el-table-column prop="user" label="管理员" width="110"></el-table-column>
@@ -75,6 +75,9 @@
                  <template slot-scope="scope">
                      <el-button type="danger" @click="deleteItem(scope.row.id)" size="mini">删除</el-button>
                      <el-button type="success" @click="editInfo(scope.row.id)"  size="mini" @getList="getList">编辑</el-button>
+                     <el-button type="success"  @click="detailed({id: scope.row.id, title:scope.row.title})"  size="mini" >编辑详情</el-button>
+                     
+                      
                  </template>
 
             </el-table-column>
@@ -255,7 +258,32 @@ export default {
           infoID.value = id
         
         }
-
+        //详情页 
+        const detailed = (data) => {
+          //预先存值
+          root.$store.commit("infoDetailed/UPDATE_STATE_VALUE", {
+              id: {
+                val:data.id,
+                sessionKey: "infoId",
+                session: true
+              },
+              title: {
+                val: data.title,
+                sessionKey: "infoTitle",
+                session: true
+              }
+            })
+          // root.$store.commit("infoDetailed/SET_ID", data.id);
+          // root.$store.commit("infoDetailed/SET_TITLE", data.title)
+          root.$router.push({
+            name: "InfoDetailed",
+            params: 
+            {
+              id: data.id,
+              title: data.title
+            }
+          })
+        }
         const getList = () =>{
           let requestData = formatData()
           // let requestData = {
@@ -347,6 +375,7 @@ export default {
             formatData, 
             closeEditDialog,
             editInfo,
+            detailed,
 
              
 

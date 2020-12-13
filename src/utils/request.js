@@ -28,7 +28,7 @@ service.interceptors.request.use(function (config) {
  */
 service.interceptors.response.use(function (response) {
     // 对响应数据做点什么
-    let data = response.data
+    let data = response.data 
     if(data.resCode != 0 ){
         Message.error(data.message);
         return Promise.reject(data);
@@ -40,10 +40,14 @@ service.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
+
+
+ 
+
  
 
 
-export default service;
+export default service; 
 /**
  * 使用export default时，但不能同时存在多个default
  * 文件 import 不需要{}

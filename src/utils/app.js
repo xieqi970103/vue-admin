@@ -1,7 +1,7 @@
 import cookie from "cookie_js";
 
 const adminToKen = "admin_toKen";
-const usernameKey = "username";
+const usernameKey = "username"; 
 
 export function getToKen(){
     return cookie.get(adminToKen)
@@ -21,4 +21,4 @@ export function getUserName(){
 }
 export function removeUserName(){
     return cookie.remove(usernameKey)
-}
+} 

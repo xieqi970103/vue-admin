@@ -1,6 +1,7 @@
   import { MessageBox, Message } from 'element-ui';
 // export default {
 //     install (Vue, options){
+          //注册全局方法
 //         Vue.prototype.confirm = (params) => {
 //             MessageBox.confirm(params.content,  params.tip || "提示", {
 //                 confirmButtonText: '确定',
@@ -41,15 +42,16 @@ export function global(){
                 str.value = params.id || '',
                 params.fn && params.fn(params.id || '')
                  
-                Message({
-                    type: 'success',
-                    message: '删除成功!'
-                });
+                // Message({
+                //     type: 'success',
+                //     message: '删除成功!'
+                // });
             }).catch( err => {
+                console.log(err)
                 params.catchfn && params.catchfn(params.id || '')
                 Message({
                     type: 'info',
-                    message: '已取消删除'
+                    message: '已取消'
                 });
             });
     }

@@ -6,4 +6,13 @@
 
 <style lang="scss">
 #app {}
+::-webkit-scrollbar {
+ width: 7px;
+ height: 10px;
+}
+/* 滚动条的滑块 */
+::-webkit-scrollbar-thumb {
+ background-color: #a1a3a9;
+ border-radius: 3px;
+}
 </style>

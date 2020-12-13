@@ -9,4 +9,16 @@
 .pull-right{
     float: right;
 }
+
+//overflow
+.overflow-h {
+    overflow: hidden;
+}
+
 .black-space-25 { height: 25px;}
+.black-space-10 { height: 10px;}
+@for $i from 1 through 110 {
+    .margin-left-#{$i} {
+        margin-left: (1px * $i);
+    }
+}

@@ -56,7 +56,7 @@
                 <el-button size="mini"  type="danger" @click="getList">搜索</el-button>
             </el-col>
             <el-col :span="2" >
-                <el-button @click="dialog_info = true"  size="mini"  type="danger" class="pull-right"  >新增</el-button>
+                <el-button @click="dialog_info = true"  size="mini"  type="danger" class="pull-right"  v-if="btnPerm('info:add')">新增</el-button>
             </el-col>
         </el-row>
 
@@ -73,9 +73,9 @@
             <el-table-column prop="user" label="管理员" width="110"></el-table-column>
             <el-table-column label="操作"   >
                  <template slot-scope="scope">
-                     <el-button type="danger" @click="deleteItem(scope.row.id)" size="mini">删除</el-button>
-                     <el-button type="success" @click="editInfo(scope.row.id)"  size="mini" @getList="getList">编辑</el-button>
-                     <el-button type="success"  @click="detailed({id: scope.row.id, title:scope.row.title})"  size="mini" >编辑详情</el-button>
+                     <el-button type="danger" @click="deleteItem(scope.row.id)" size="mini" v-if="btnPerm('info:del')">删除</el-button>
+                     <el-button type="success" @click="editInfo(scope.row.id)"  size="mini" @getList="getList" v-if="btnPerm('info:edit')">编辑</el-button>
+                     <el-button type="success"  @click="detailed({id: scope.row.id, title:scope.row.title})"  size="mini" v-if="btnPerm('info:detailed')">编辑详情</el-button>
                      
                       
                  </template>
@@ -87,7 +87,7 @@
         <!--  底部分页  -->
         <el-row >
             <el-col :span="8">
-                <el-button type="small" @click="deleteAll">批量删除</el-button>
+                <el-button type="small" @click="deleteAll" v-if="btnPerm('info:batchDel')">批量删除</el-button>
             </el-col>
             <el-col :span="16">
                 <el-pagination
@@ -270,7 +270,6 @@ export default {
               title: {
                 val: data.title,
                 sessionKey: "infoTitle",
-                session: true
               }
             })
           // root.$store.commit("infoDetailed/SET_ID", data.id);

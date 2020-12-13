@@ -20,11 +20,11 @@
                 <!-- 一级菜单 -->
                     <template slot="title" >
                         <svg-icon :iconClass="item.meta.icon" :className="item.meta.icon" />
-                        <span slot="title">{{ item.meta.name }}</span>
+                        <span style="font-size: 12px; display:inline-block;height: 20px; line-height:20px; " class="text" slot="title">{{ item.meta.name }}</span>
                     </template>
                     <!-- 子菜单 -->
                     <template v-for="subItem in item.children"> 
-                        <el-menu-item   v-if="!subItem.hidden" :key="subItem.id" :index="subItem.path">{{ subItem.meta.name }}</el-menu-item>
+                        <el-menu-item   v-if="!subItem.hidden" :key="subItem.id" :index="subItem.path" style="font-size: 12px; display:inline-block;height: 40px; line-height:40px; ">{{ subItem.meta.name }}</el-menu-item>
                     </template>
                      
                 </el-submenu>
@@ -64,7 +64,7 @@ export default {
     left: 0px;
     width: $navMenu;
     height: 100vh;
-    background-color: #344a5f;
+    background-color: #303035;//#082542;
     @include webkit(transition, all 0.3s ease 0s);
     //-webkit-transition: all 0.3s ease 0s;
     //-moz-transition: all 0.3s ease 0s;;
@@ -80,7 +80,7 @@ export default {
     text-align: center;
     img {
         margin: 10px auto 0 0;
-        width: 92px;
+        width: 80px;
         @include webkit(transition, all 0.3s ease 0s);
     }
 }
@@ -92,7 +92,7 @@ export default {
     text-align: center;
     img {
         margin: 10px auto 0 0;
-        width: 92px;
+        width: 80px;
     }
 }
 }
@@ -105,4 +105,5 @@ export default {
         width: 25px;
     }
 }
+ 
 </style>

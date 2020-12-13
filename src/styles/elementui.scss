@@ -1,8 +1,8 @@
 .el-submenu .el-menu-item {
-    font-size: 14px;
+    font-size: 12px;
     padding-left: 50px !important;
     &.is-active{
-        background-color: rgba(245, 108, 108, 0.2) !important;
+        background-color: rgba(37, 37, 37, 0.6) !important;
     }
 }
 //修改一级菜单样式
@@ -81,3 +81,19 @@ div.ql-toolbar.ql-snow .ql-formats {
 div.ql-snow .ql-picker {
     height: 38px
 }
+.el-tag--medium {
+    width: 60px ;
+}
+.el-table .cell {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    line-height: 23px;
+    padding-right: 10px;
+    transition: background-color .25s ease;
+    white-space: nowrap; //文本强制不换行；
+    text-overflow:ellipsis; //文本溢出显示省略号；
+    overflow:hidden; //溢出的部分隐藏；
+} 

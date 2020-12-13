@@ -18,7 +18,38 @@ router.beforeEach((to, from, next) => {
             next() // to
         } else {
              //路由动态添加，分配菜单，每一个角色分配不同的菜单
-             next() // to
+            /**
+             * 1.什么时候处理动态路由，
+             * 2.以什么条件处理
+             * roles[]
+             */
+            if(store.getters['app/roles'].length === 0){
+                
+                store.dispatch('permission/getRoules' ).then(response => { 
+                    let role = response.role
+                    let button = response.button 
+                    let btnPerm = response.btnPerm
+                    store.commit("app/SET_ROLES", role) 
+                    store.commit("app/SET_BUTTON", btnPerm)
+                    //存储角色
+                    console.log(response)
+                    store.dispatch('permission/createRouter', role).then(response => {
+                         let addRouter = store.getters['permission/addRouters']
+                         let allRouter = store.getters['permission/allRouters']
+                         //路由更新
+                         router.options.routes = allRouter
+                         //添加动态路由
+                         router.addRoutes(addRouter)
+                         next({ ...to, replace: true})
+                         // es6扩展运算符，防止内容发生变化的情况
+                         //replace: true 不被记录历史记录
+                    })
+                })
+            } else {
+                next()
+            }
+             
+            // next() // to
         }
         
         

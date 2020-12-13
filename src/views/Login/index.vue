@@ -1,28 +1,29 @@
 <template>
     <div id="login">
-         <div class="login-wrap">
-          <ul class="menu-tab">
+        <div class="wrap">
+            <div class="login-wrap">
+            <ul class="menu-tab">
             <li :class="{'current': item.current }" v-for="item in menuTab" v-bind:key="item.id" @click="toggleMneu(item)">{{ item.txt }}</li>
-          </ul>
+            </ul>
             <!--表单 start-->
             <el-form :model="ruleForm" status-icon :rules="rules" ref="loginForm" class="login-form"   size="medium">
                 <el-form-item   prop="username" class="item-from">
                     <label for="username">账户</label>
-                    <el-input id="username" type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item   prop="password" class="item-from">
+                    <el-input prefix-icon="el-icon-user-solid" id="username" type="text" v-model="ruleForm.username" autocomplete="off" width="80%"></el-input>
+                </el-form-item> 
+                <el-form-item    prop="password" class="item-from">
                     <label>密码</label>
-                    <el-input type="password" v-model="ruleForm.password" autocomplete="off" maxlength="20" minlength="6"></el-input>
+                    <el-input  prefix-icon="el-icon-lock" type="password" v-model="ruleForm.password" autocomplete="off" maxlength="20" minlength="6"></el-input>
                 </el-form-item>
                 <el-form-item   prop="passwords" class="item-from" v-show="model === 'register'">
                     <label>重复密码</label>
-                    <el-input type="password" v-model="ruleForm.passwords" autocomplete="off" maxlength="20" minlength="6"></el-input>
+                    <el-input prefix-icon="el-icon-lock"  type="password" v-model="ruleForm.passwords" autocomplete="off" maxlength="20" minlength="6"></el-input>
                 </el-form-item>
                 <el-form-item   prop="code" class="item-from">
                     <label>验证码 </label>
                     <el-row :gutter="10">
                     <el-col :span="15">
-                    <el-input type="text" v-model="ruleForm.code" maxlength="6" minlength="6"></el-input>
+                    <el-input prefix-icon="console" type="text" v-model="ruleForm.code" maxlength="6" minlength="6"></el-input>
                     </el-col>
                     <el-col :span="9">
                     <el-button type="success" class="block" @click="getSms()" :disabled="codeButtonStatus.status">{{ codeButtonStatus.text }}</el-button>
@@ -33,8 +34,8 @@
                     <el-button type="danger" @click="submitForm('loginForm')" :disabled = loginButtonStatus class="login-btn block">{{ model == "login" ? "登录" : "注册" }}</el-button>
                 </el-form-item>
             </el-form>
-         </div>
-         
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -181,18 +182,14 @@
              */
             const getSms = (() => {
                 //进行提示
-               if(ruleForm.username == ''){
+                if(ruleForm.username == ''){
                     root.$message.error('邮箱不能为空');
                     return false
                 }
-
                 if(validateEmail(ruleForm.username)){
                     root.$message.error('邮箱格式有误，请重新输入！！');
                     return false
-                }
-                
-
-
+                }               
                 //获取验证码
                 let requestData = {
                     username: ruleForm.username,
@@ -202,8 +199,9 @@
                 codeButtonStatus.status = true,
                 codeButtonStatus.text = '发送中'
 
-                setTimeout(() => {
+                setTimeout(() => { 
                     GetSms(requestData).then(response => {
+                      
                         let data = response.data
                         root.$message({
                             message: data.message,
@@ -214,20 +212,20 @@
                         //调用定时器,倒计时
                         countDown(60)
                     }).catch(error =>{
-
+                         
                     })
                 },1000)
             })
             /**
              * 提交表单
              */
-            const submitForm = (formName => {
+            const submitForm = (formName => { 
                 refs[formName].validate((valid) => {
                 //表单验证通过
                 if (valid) {
                     if(model.value === 'login'){
                         login()
-                    } else {
+                    } else { 
                         register()
                     }
                 } else {
@@ -272,7 +270,7 @@
                     password: sha1(ruleForm.password),
                     code: ruleForm.code,
                     model: 'register'
-                }
+                } 
                 //注册接口
                 Regiser(requestdata).then(response => {
                     let data = response.data
@@ -347,22 +345,32 @@
 </script>
 <style lang="scss" scoped>
 #login {
-    height: 100vh;
-    background-color: #344a5f;
+    height: 90vh;
+    background-color:#082542; 
+    padding-top: 10vh;
 }
 .login-wrap {
-    width: 330px;
+     
+    
     margin: auto;
  
 }
+.wrap {
+     
+    padding: 20px;
+    background-color: #fff;
+    width: 350px;
+    margin: auto;
+    border-radius: 6px;
+}
 .menu-tab {
+  
   text-align: center;
   li {
     display: inline-block;
     width: 88px;
     line-height: 36px;
-    font-size: 14px;
-    color: #fff;
+    font-size: 14px; 
     border-radius: 2px;
     cursor: pointer;
   }
@@ -375,8 +383,7 @@
     label {      
         display: block; 
         margin-bottom: 3px;
-        font-size: 14px;
-        color: #fff;
+        font-size: 14px; 
     }
     .item-from {
         margin-bottom: 13px;

@@ -69,12 +69,26 @@ module.exports = {
     hotOnly: false,
     proxy: {
       '/devApi': {
-        target:  "http://www.web-jshtml.cn/productapi/token", //API服务器的地址
+        target:  "http://47.110.148.157:9000", //API服务器的地址
         changeOrigin: true,
         pathRewrite: {
           '^/devApi': ''
         }
-      }
+      },
+      '/xieqiApi': {
+        target:  "http://api.heclouds.com/cmds?device_id=653454326", //API服务器的地址
+        changeOrigin: true,
+        pathRewrite: {
+          '^/xieqiApi': ''
+        }
+      },
+      // '/devApi': {
+      //   target:  "http://47.112.249.95:8080/LOG", //API服务器的地址
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/devApi': ''
+      //   }
+      // },
     },// 设置代理
     overlay: { // 全屏模式下是否显示脚本错误
       warnings: true,

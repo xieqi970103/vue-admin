@@ -3,10 +3,17 @@ import { setToKen,  setUserName, getUserName, removeToKen, removeUserName} from 
 const state = {
   isCollapse: JSON.parse(sessionStorage.getItem('isCollapse')) || false,
   to_Ken: '',
-  username: getUserName() || '',
+  username: getUserName() || '', 
+  roles: [],
+  buttonPermission: [],
+  message_count: 999
 }
 const getters = { //computed
-  isCollapse: state => state.isCollapse,
+  isCollapse: state => state.isCollapse, 
+  buttonPermission: state => state.buttonPermission,  
+  roles: state => state.roles,
+  to_Ken: state => state.to_Ken,
+  message_count: state => state.message_count,
 }
 const mutations = { //同步 没有回调
   SET_COLLAPSE(state){
@@ -19,6 +26,15 @@ const mutations = { //同步 没有回调
   },
   SET_USERNAME(state, value){
     state.username = value
+  }, 
+  SET_ROLES(state, value){
+    state.roles = value  
+  },
+  SET_BUTTON(state, value){
+    state.buttonPermission = value 
+  },
+  SET_MESSAGE_COUNT(state, value){
+    state.message_count = value 
   },
 }
 const actions = { //可以回调处理
@@ -46,6 +62,7 @@ const actions = { //可以回调处理
       removeUserName()
       commit("SET_TOKEN", '')
       commit("SET_USERNAME", '')
+      commit("SET_ROLES", '')
       resolve();
     })
     
